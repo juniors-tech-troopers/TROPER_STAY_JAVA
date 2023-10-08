@@ -6,7 +6,7 @@ public class main {
 
     public static void main(String[] args) {
         //Creamos una instancia de la clase conexion para establecer la conexión a la base de datos
-        Conexion cn = new Conexion();
+        Conexion cn = new Conexion(); // Esto no se debe usar
         //Intanciamos la clase Menu
         //Intanciamos la clase Menu
         Menu menu = new Menu();

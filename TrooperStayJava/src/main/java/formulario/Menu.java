@@ -8,6 +8,8 @@ public class Menu {
     boolean salir = false;
     Login lo = new Login();
     Registro re = new Registro();
+
+
     
    
 

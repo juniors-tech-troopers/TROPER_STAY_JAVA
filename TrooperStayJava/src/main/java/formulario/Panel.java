@@ -6,7 +6,8 @@ import database.Conexion;
 import javax.swing.JOptionPane;
 
 public class Panel {
-    Conexion miConexion = new Conexion();
+    Conexion miConexion = new Conexion(); // Esto al parecer no va
+    CrearHospedaje crearHospedaje = new CrearHospedaje();
      boolean salir = false;
 
     public void panel(){
@@ -16,11 +17,11 @@ public class Panel {
             switch (opcion) {
                 case "1":
                     // Lógica para iniciar sesión
-                    
+
                     break;
                 case "2":
                     // Lógica para registrarse
-                    
+                    crearHospedaje.cargarHospedaje(1);
                     break;
                 case "3":
                     salir = true;
