@@ -21,7 +21,7 @@ public class Panel {
                     break;
                 case "2":
                     // Lógica para registrarse
-                    crearHospedaje.cargarHospedaje(1);
+                    crearHospedaje.cargarHospedaje(1); // Esto es codigo duro
                     break;
                 case "3":
                     salir = true;

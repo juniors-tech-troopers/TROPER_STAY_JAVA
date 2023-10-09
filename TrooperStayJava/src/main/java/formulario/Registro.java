@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 public class Registro {
     
-    Conexion cn = new Conexion();
+    Conexion cn = new Conexion(); // Esto esta de más
      public void registrarUsuario() {
         String nombreUsuario = JOptionPane.showInputDialog("Ingrese un nombre de usuario:");
         String contrasenia = JOptionPane.showInputDialog("Ingrese una contraseña:");
