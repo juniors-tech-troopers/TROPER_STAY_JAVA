@@ -31,7 +31,7 @@ public class Carrito {
         double total = 0.0;
         for (AlojamientoHospedaje alojamiento : alojamientosEnCarrito) {
             // Asumiendo que AlojamientoHospedaje tiene un método getPrecio() para obtener el precio
-            total += alojamiento.getPrecio();
+            total += alojamiento.getPrecio_por_noche();
         }
         return total;
     }
