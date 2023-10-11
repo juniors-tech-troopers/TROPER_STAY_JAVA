@@ -9,7 +9,7 @@ public class Conexion {
 
     public Conexion() {
         try {
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/trooper_stay", "root", "32893064");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/trooper_stay", "root", "root");
         } catch (Exception e) {
             System.err.print("Error" + e);
         }
