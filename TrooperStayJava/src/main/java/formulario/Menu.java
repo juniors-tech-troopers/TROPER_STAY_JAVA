@@ -16,9 +16,9 @@ public class Menu {
     public void Menu() {
         while (!salir) {
             //Creamos un arreglo que contenga los elementos del panel de opciones
-            String [] arreglo = {"Iniciar Secion", "Registrarte", "Salir"};
+            String [] arreglo = {"Iniciar Sesión", "Registrarte", "Salir"};
             // usamos el comando de JOptionPane.showOptionDiaglog te permite seleeccional opciones
-            int opcion = JOptionPane.showOptionDialog(null, "Elige una opcion", "MENU PRINCIPAL", 0, JOptionPane.QUESTION_MESSAGE, null, arreglo, "");
+            int opcion = JOptionPane.showOptionDialog(null, "Elige una opción", "MENU PRINCIPAL", 0, JOptionPane.QUESTION_MESSAGE, null, arreglo, "");
             
             //Por medio de un SWITCH derivamos la opcion seleccionada en base a la posicion del arreglo
             switch (opcion) {

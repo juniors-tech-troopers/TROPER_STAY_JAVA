@@ -6,30 +6,45 @@ import database.Conexion;
 import javax.swing.JOptionPane;
 
 public class Panel {
-    Conexion miConexion = new Conexion(); // Esto al parecer no va
-    CrearHospedaje crearHospedaje = new CrearHospedaje();
-     boolean salir = false;
+    
+    //Creamos un objeto de la clase cargar hospedaje
+    CrearHospedaje crearhospedaje = new CrearHospedaje();     
+        
+    //Creamos un objeto de la clase verHospedaje
+    VerHospedajes vista = new VerHospedajes();
+        
+    private int idUsuario; // Agrega una variable para almacenar el ID de usuario
+    //Constructor 
+     public Panel() {
+        
+                
+    }
+      
+    public void Panel() {
+        while (true) { // Cambiamos la condición a true
+            String[] arreglo = {"Ver hospedajes", "Cargar Hospedaje", "Salir"};
+            int opcion = JOptionPane.showOptionDialog(null, "Elige una opción", "MENÚ PRINCIPAL", 0, JOptionPane.QUESTION_MESSAGE, null, arreglo, "");
 
-    public void panel(){
-           while (!salir) {
-            String opcion = JOptionPane.showInputDialog("Home:\n1.Ver hospedajes\n2.Cargar hospedaje\n3. Salir");
+            if (opcion == -1 || opcion == 2) { // Salir si se cierra el cuadro o se selecciona "Salir"
+                break;
+            }
 
             switch (opcion) {
-                case "1":
-                    // Lógica para iniciar sesión
-
+                case 0:
+                    // Lógica para "Ver hospedajes"
+                    vista.ingresarFiltrosDeUsuario();
                     break;
-                case "2":
-                    // Lógica para registrarse
-                    crearHospedaje.cargarHospedaje(1); // Esto es codigo duro
+                case 1:
+                    //Lógica para "Insetar hospedajes"
+                   crearhospedaje.cargarHospedaje(1);
+                    
                     break;
-                case "3":
-                    salir = true;
-                    break;
+                case 2:
                 default:
                     JOptionPane.showMessageDialog(null, "Opción no válida. Por favor, elija una opción válida.");
                     break;
             }
-        } 
+        }
     }
 }
+

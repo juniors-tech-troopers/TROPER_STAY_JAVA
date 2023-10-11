@@ -13,7 +13,7 @@ public class CrearHospedaje {
 
     public void cargarHospedaje(int idUsuario){
         String nombreLugar = JOptionPane.showInputDialog("Ingrese un nombre del Lugar:");
-        String tipo = JOptionPane.showInputDialog("Ingrese 1- Departamento 2- Cabaña 3- Hotel un 1/4:");
+        int tipo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese 1- Departamento 2- Cabaña 3- Hotel un 1/4:"));
         int capacidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese capacidad MAXIMA:"));
         String localizacion = JOptionPane.showInputDialog("Ingrese PROVINCIA:");
         double precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el monto por día:"));

@@ -22,7 +22,7 @@ public class Login {
 
         if (validarCredenciales(nombreUsuario, contrasenia)) {
             JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso.");
-            panel.panel();
+            panel.Panel();
             
         } else {
             JOptionPane.showMessageDialog(null, "Inicio de sesión fallido. Verifique sus credenciales.");

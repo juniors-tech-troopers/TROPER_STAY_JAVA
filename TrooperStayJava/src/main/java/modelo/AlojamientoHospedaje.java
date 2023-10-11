@@ -2,20 +2,22 @@ package modelo;
 
 public class AlojamientoHospedaje {
 
-    //Giaca e ivo estuvieron acá celular+54 9 2604 05-8993-+54 9 2604 84-9699
+    
     // Se usa private final porque es un atributo inmutable y despues usamos un get
     private final int id;
     private final String nombre;
-    private final String tipo;
+    //Cambiasmos el tipo de dato int
+    private final int tipo;
     private final int capacidad;
     private final String localizacion;
     private final double precio_por_noche;
-    private final boolean estado;
+    //Cambiamos el tipo de dato a estado
+    private byte estado;
     private final int id_usuario;
     private final int id_usuario_inquilino;
     private final String estadia;
 
-    public AlojamientoHospedaje(int id, String nombre, String tipo, int capacidad, String localizacion, double precio_por_noche, boolean estado, int id_usuario, int id_usuario_inquilino, int idUsuarioInquilino, String estadia) {
+    public AlojamientoHospedaje(int id, String nombre, int tipo, int capacidad, String localizacion, double precio_por_noche, byte estado, int id_usuario, int idUsuarioInquilino, String estadia) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
@@ -29,7 +31,7 @@ public class AlojamientoHospedaje {
     }
 
     // Se creo para crear un nuevo hospedaje
-    public AlojamientoHospedaje(String nombre, String tipo, int capacidad, String localizacion, double precio_por_noche, int id_usuario) {
+    public AlojamientoHospedaje(String nombre, int tipo, int capacidad, String localizacion, double precio_por_noche, int id_usuario) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.capacidad = capacidad;
@@ -38,12 +40,13 @@ public class AlojamientoHospedaje {
         this.id_usuario = id_usuario;
         // Son creados por default
         this.id = 0;
-        this.estado = false; // Falso porque no esta alquilado :)
+        this.estado = 0; // Falso porque no esta alquilado :)
         this.id_usuario_inquilino = 0;
         this.estadia = "";
 
     }
-
+    
+    //Getter y Setter
     public int getId() {
         return id;
     }
@@ -52,7 +55,7 @@ public class AlojamientoHospedaje {
         return nombre;
     }
 
-    public String getTipo() {
+    public int getTipo() {
         return tipo;
     }
 
@@ -68,7 +71,7 @@ public class AlojamientoHospedaje {
         return precio_por_noche;
     }
 
-    public boolean isEstado() {
+    public byte getEstado() {
         return estado;
     }
 
@@ -83,4 +86,11 @@ public class AlojamientoHospedaje {
     public String getEstadia() {
         return estadia;
     }
+
+   
+   
+
+   
+  
 }
+

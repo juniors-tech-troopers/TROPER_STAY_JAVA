@@ -16,11 +16,11 @@ public class IngresarInformacion {
 
         try (PreparedStatement statement = CONEXION.prepareStatement(sql)) {
             statement.setString(1, nuevoHospedaje.getNombre());
-            statement.setString(2, nuevoHospedaje.getTipo()); // En el codigo es un String pero en la base de datos es un int
+            statement.setInt(2, nuevoHospedaje.getTipo()); // En el codigo es un String pero en la base de datos es un int
             statement.setInt(3, nuevoHospedaje.getCapacidad());
             statement.setString(4, nuevoHospedaje.getLocalizacion());
             statement.setDouble(5, nuevoHospedaje.getPrecio_por_noche());
-            statement.setBoolean(6, nuevoHospedaje.isEstado());
+            statement.setByte(6, nuevoHospedaje.getEstado());
             statement.setInt(7, nuevoHospedaje.getId_usuario());
 
             int filasAfectadas = statement.executeUpdate();
@@ -32,3 +32,4 @@ public class IngresarInformacion {
     }
 
 }
+
