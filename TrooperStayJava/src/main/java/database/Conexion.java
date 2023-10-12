@@ -13,7 +13,7 @@ public class Conexion {
     // TODO: ANTIGUO CONECTION
     public Conexion() {
         try {
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/trooper_stay", "root", "root");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/trooper_stay", "root", "02091898");
         } catch (Exception e) {
             System.err.print("Error" + e);
         }
