@@ -36,7 +36,7 @@ public class Panel {
                     break;
                 case 1:
                     //Lógica para "Insetar hospedajes"
-                   crearhospedaje.cargarHospedaje(1);
+                   crearhospedaje.cargarHospedaje(11);
                     
                     break;
                 case 2:
