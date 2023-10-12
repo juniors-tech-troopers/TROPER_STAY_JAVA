@@ -6,11 +6,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
 
+// TODO: ANTIGUO CONECTION
 public class Conexion {
-
     public Connection conexion;
-
-    // TODO: ANTIGUO CONECTION
     public Conexion() {
         try {
             conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/trooper_stay", "root", "02091898");
@@ -26,7 +24,11 @@ public class Conexion {
 }
 
 /* TODO: Este se va a reemplazar por el antiguo conection, EL VIERNES
-public Conexion() {
+public class Conexion {
+
+    public Connection conexion;
+
+    public Conexion() {
         try {
             Properties properties = new Properties();
             try {
@@ -47,4 +49,11 @@ public Conexion() {
             System.err.print("Error" + e);
         }
     }
+
+    public Connection getConexion() {
+        return conexion;
+    }
+
+}
+
  */
