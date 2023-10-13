@@ -11,7 +11,7 @@ public class Conexion {
     public Connection conexion;
     public Conexion() {
         try {
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/trooper_stay", "root", "02091898");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/trooper_stay", "root", "root");
         } catch (Exception e) {
             System.err.print("Error" + e);
         }

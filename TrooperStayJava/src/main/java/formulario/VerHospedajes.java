@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modelo.AlojamientoHospedaje;
+import modelo.Provincias;
 
 /**
  *
@@ -18,16 +19,23 @@ import modelo.AlojamientoHospedaje;
  */
 public class VerHospedajes extends JPanel {
        private final ObtenerInformacion obtenerInformacion;
-    private final Carrito carrito;   
-
+        private final Carrito carrito;
+            Provincias provincias = new Provincias(); // Instanciamos el modelo
+    
+    
     public VerHospedajes() {
         setLayout(new BorderLayout());
+        
         obtenerInformacion = new ObtenerInformacion();
         carrito = new Carrito();
+ 
     }
 
     public void ingresarFiltrosDeUsuario() {
-        String localizacion = JOptionPane.showInputDialog("Ingrese la localización:");
+        // Llamamos al metodo get provincia para realizar la muestra por filtrado
+        String localizacion = provincias.getProvincias();
+        // Esto para seguir un patron de ingreso a la base de datos.
+        
         int capacidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la capacidad:"));
 
         // Realiza la búsqueda con los filtros ingresados por el usuario
@@ -37,11 +45,6 @@ public class VerHospedajes extends JPanel {
         List<AlojamientoHospedaje> alquileresSeleccionados = seleccionarAlquileres(hospedajes);
 
         // Agregar al carrito los alquileres seleccionados
-        for (AlojamientoHospedaje hospedaje : alquileresSeleccionados) {
-            carrito.agregarAlojamiento(hospedaje);
-        }
-        
-        JOptionPane.showMessageDialog(this, "Alojamientos agregados al carrito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }
 // Listado alquileres
     
