@@ -11,7 +11,6 @@ public class IngresarInformacion {
     private static final Connection CONEXION = new Conexion().getConexion();
 
     public Boolean cargarHospedaje(AlojamientoHospedaje nuevoHospedaje) {
-
         String sql = "INSERT INTO hospedajes (nombre, tipo, capacidad, localizacion, precio_por_noche, estado,id_usuario) VALUES (? , ? , ? , ? , ? , ? , ?)";
 
         try (PreparedStatement statement = CONEXION.prepareStatement(sql)) {

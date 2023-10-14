@@ -1,5 +1,8 @@
 package modelo;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class AlojamientoHospedaje {
 
     
@@ -14,8 +17,9 @@ public class AlojamientoHospedaje {
     //Cambiamos el tipo de dato a estado
     private byte estado;
     private final int id_usuario;
-    private final int id_usuario_inquilino;
-    private final String estadia;
+    private int id_usuario_inquilino;
+    private String inicio_estadia; // 2023-10-13 +7
+    private String estadia; // 2023-10-20
 
     public AlojamientoHospedaje(int id, String nombre, int tipo, int capacidad, String localizacion, double precio_por_noche, byte estado, int id_usuario, int idUsuarioInquilino, String estadia) {
         this.id = id;
@@ -30,6 +34,7 @@ public class AlojamientoHospedaje {
         this.estadia = estadia;
     }
 
+
     // Se creo para crear un nuevo hospedaje
     public AlojamientoHospedaje(String nombre, int tipo, int capacidad, String localizacion, double precio_por_noche, int id_usuario) {
         this.nombre = nombre;
@@ -42,6 +47,7 @@ public class AlojamientoHospedaje {
         this.id = 0;
         this.estado = 0; // Falso porque no esta alquilado :)
         this.id_usuario_inquilino = 0;
+        this.inicio_estadia = "";
         this.estadia = "";
 
     }
@@ -83,14 +89,34 @@ public class AlojamientoHospedaje {
         return id_usuario_inquilino;
     }
 
+    public String getInicio_estadia() {
+        return inicio_estadia;
+    }
     public String getEstadia() {
         return estadia;
     }
 
-   
-   
+    public void setEstado(byte estado) {
+        this.estado = estado;
+    }
 
-   
-  
+    public void setId_usuario_inquilino(int id_usuario_inquilino) {
+        this.id_usuario_inquilino = id_usuario_inquilino;
+    }
+
+    public void setInicio_estadia(String inicio_estadia) {
+        this.inicio_estadia = inicio_estadia;
+    }
+
+    public void setEstadia(int estadia) {
+        // Convierte inicio_estadia a LocalDate
+        LocalDate fechaInicio = LocalDate.parse(inicio_estadia, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        // Agrega la cantidad de días
+        LocalDate fechaEstadia = fechaInicio.plusDays(estadia);
+
+        // Convierte la fecha resultante de vuelta a String en el formato deseado
+        this.estadia = fechaEstadia.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
 }
 

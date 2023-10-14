@@ -6,11 +6,53 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 import modelo.AlojamientoHospedaje;
+import modelo.Usuario;
+
+import javax.swing.*;
 
 public class ObtenerInformacion {
 
     private static final Connection CONEXION = new Conexion().getConexion();
+
+
+    public Usuario loguearse(String nombreUsuario, String contrasenia) {
+        //Query de consulta para verificar si los datos ingresados son correctos
+        String sql = "SELECT id, nombre_de_usuario, saldo, contrasenia FROM usuarios WHERE nombre_de_usuario = ?";
+        try (PreparedStatement statement = CONEXION.prepareStatement(sql)) {
+            statement.setString(1, nombreUsuario);
+            ResultSet resultSet = statement.executeQuery();
+
+            // Devolvemos un null si el usuario no se encontro
+            // resultSet.next() == false => !resultSet.next()
+            if (!resultSet.next()) {
+                JOptionPane.showMessageDialog(null, "Usuario incorrecto");
+                return null;
+            }
+
+            // Defini, la contraseña del db
+            String contraseniaDB = resultSet.getString("contrasenia");
+
+            if (Objects.equals(contraseniaDB, contrasenia)) {
+                Usuario usuario = new Usuario(
+                        resultSet.getInt("id"),
+                        resultSet.getString("nombre_de_usuario"),
+                        resultSet.getDouble("saldo")
+                );
+                return usuario;
+            } else {
+                JOptionPane.showMessageDialog(null, "Contraseña Incorrecta");
+                return null;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            return null;
+        }
+    }
 
     public List<AlojamientoHospedaje> filtrarHospedajes(String localizacion, int capacidad) {
         List<AlojamientoHospedaje> hospedajesFiltrados = new ArrayList<>();
@@ -46,5 +88,21 @@ public class ObtenerInformacion {
         }
 
         return hospedajesFiltrados;
+    }
+
+    public double obtenerSaldoDeUsuarioPorId(int usuarioId) {
+        String sql = "SELECT saldo FROM usuarios WHERE id = ?;";
+
+        try {
+            PreparedStatement stmt = CONEXION.prepareStatement(sql);
+            stmt.setInt(1, usuarioId);
+            ResultSet rs = stmt.executeQuery();
+
+            return rs.getDouble("saldo");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }

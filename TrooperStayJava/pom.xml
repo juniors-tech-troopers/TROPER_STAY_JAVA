@@ -14,7 +14,7 @@
             <version>8.0.27</version> <!-- Utiliza la versión más reciente disponible -->
         </dependency>
     </dependencies>
-    
+
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
