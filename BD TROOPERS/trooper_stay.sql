@@ -1,5 +1,5 @@
 -- --------------------------------------------------------
--- Host:                         127.0.0.1
+-- Host:                         localhost
 -- Versión del servidor:         8.0.34 - MySQL Community Server - GPL
 -- SO del servidor:              Win64
 -- HeidiSQL Versión:             12.5.0.6677
@@ -16,33 +16,40 @@
 
 
 -- Volcando estructura de base de datos para trooper_stay
+DROP DATABASE IF EXISTS `trooper_stay`;
 CREATE DATABASE IF NOT EXISTS `trooper_stay` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `trooper_stay`;
 
 -- Volcando estructura para tabla trooper_stay.hospedajes
+DROP TABLE IF EXISTS `hospedajes`;
 CREATE TABLE IF NOT EXISTS `hospedajes` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) DEFAULT NULL,
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `tipo` int DEFAULT NULL,
   `capacidad` int DEFAULT NULL,
-  `localizacion` char(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `localizacion` varchar(50) DEFAULT NULL,
   `precio_por_noche` float DEFAULT NULL,
-  `estado` bit(1) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
   `id_usuario` int DEFAULT NULL,
   `id_usuario_inquilino` int DEFAULT NULL,
+  `inicio_estadia` date DEFAULT NULL,
   `estadia` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_usuario` (`id_usuario`),
   CONSTRAINT `id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla trooper_stay.hospedajes: ~6 rows (aproximadamente)
-INSERT INTO `hospedajes` (`id`, `nombre`, `tipo`, `capacidad`, `localizacion`, `precio_por_noche`, `estado`, `id_usuario`, `id_usuario_inquilino`, `estadia`) VALUES
-	(10, 'Mendoza', 1, 5, 'Mendoza', 1000, b'0', 1, NULL, NULL),
-	(11, 'Departamento', 1, 4, 'Mendoza', 2000, b'0', 1, NULL, NULL),
-	(12, 'Casa', 1, 3, 'Mendoza', 3000, b'0', 1, NULL, NULL);
+-- Volcando datos para la tabla trooper_stay.hospedajes: ~5 rows (aproximadamente)
+DELETE FROM `hospedajes`;
+INSERT INTO `hospedajes` (`id`, `nombre`, `tipo`, `capacidad`, `localizacion`, `precio_por_noche`, `estado`, `id_usuario`, `id_usuario_inquilino`, `inicio_estadia`, `estadia`) VALUES
+	(7, 'tutancamon', 2, 5, 'buenos aires', 123456, 1, 11, 14, '2023-10-13', '2023-10-15'),
+	(8, 'calamuchita', 2, 6, 'río negro', 1450, 1, 11, 12, '2023-10-13', '2023-10-23'),
+	(9, 'ohana', 3, 5, 'buenos aires', 14570, 0, 11, NULL, NULL, NULL),
+	(10, 'pozo', 1, 5, 'buenos aires', 2000, 1, 11, 14, '2023-10-13', '2023-11-02'),
+	(11, 'queso', 2, 6, 'buenos aires', 123475, 0, 11, NULL, NULL, NULL);
 
 -- Volcando estructura para tabla trooper_stay.usuarios
+DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre_de_usuario` varchar(50) DEFAULT NULL,
@@ -53,13 +60,30 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `apellido` varchar(50) DEFAULT NULL,
   `saldo` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla trooper_stay.usuarios: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla trooper_stay.usuarios: ~2 rows (aproximadamente)
+DELETE FROM `usuarios`;
 INSERT INTO `usuarios` (`id`, `nombre_de_usuario`, `contrasenia`, `correo`, `edad`, `nombre`, `apellido`, `saldo`) VALUES
-	(1, 'Roberto30', '1234', 'roberto5@gmail.com', 45, 'Roberto', 'Figurea', 100000),
-	(2, 'Facundo', '1234', 'corre@.com', 43, 'Facundo', 'Garlopa', 1000000),
-	(8, 'Makarov342', '1234', 'juan@cristo.rey', 20, 'Jose', 'Sajnovsky', 30000);
+	(11, 'nelson', '1234', 'gg@gmail.com', 123, 'nelson', 'lassa', 40000),
+	(12, 'asd', 'asd', 'asd', 123, 'asd', 'qwe', 85500),
+	(14, 'gianca', 'test', 'gianca@gmail.com', 29, 'giancarlo', 'galvarini', 93088);
+
+-- Volcando estructura para evento trooper_stay.Terminacion_alquileres
+DROP EVENT IF EXISTS `Terminacion_alquileres`;
+DELIMITER //
+CREATE EVENT `Terminacion_alquileres` ON SCHEDULE EVERY 1 SECOND STARTS '2023-10-13 18:38:41' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+	UPDATE hospedajes 
+	
+	SET 
+		estado = 0, 
+		inicio_estadia = NULL, 
+		estadia = NULL, 
+		id_usuario_inquilino = NULL 
+	
+	WHERE FROM_UNIXTIME(UNIX_TIMESTAMP(NOW())) >= estadia;
+END//
+DELIMITER ;
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
