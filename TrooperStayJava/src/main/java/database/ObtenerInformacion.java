@@ -58,7 +58,7 @@ public class ObtenerInformacion {
         List<AlojamientoHospedaje> hospedajesFiltrados = new ArrayList<>();
 
         try {
-            String sql = "SELECT * FROM hospedajes WHERE localizacion = ? AND capacidad >= ?";
+            String sql = "SELECT * FROM hospedajes WHERE localizacion = ? AND capacidad >= ? AND estado = 0";
             PreparedStatement stmt = CONEXION.prepareStatement(sql);
             stmt.setString(1, localizacion);
             stmt.setInt(2, capacidad);

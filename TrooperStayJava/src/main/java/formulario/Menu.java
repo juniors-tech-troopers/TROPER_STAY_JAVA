@@ -1,6 +1,5 @@
 package formulario;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Menu {

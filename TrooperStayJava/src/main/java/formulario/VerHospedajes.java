@@ -76,6 +76,9 @@ public class VerHospedajes extends JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "POBRE DE MIERDA NO PODES VIAJAR");
         }
+        
+        JOptionPane.showMessageDialog(null, "PERFECTO");
+        
     }
 // Listado alquileres
 

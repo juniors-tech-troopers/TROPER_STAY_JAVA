@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
 
-// TODO: ANTIGUO CONECTION
+/* TODO: ANTIGUO CONECTION
 public class Conexion {
     public Connection conexion;
     public Conexion() {
@@ -22,8 +22,8 @@ public class Conexion {
     }
 
 }
-
-/* TODO: Este se va a reemplazar por el antiguo conection, EL VIERNES
+*/
+//TODO Nuevo
 public class Conexion {
 
     public Connection conexion;
@@ -55,5 +55,3 @@ public class Conexion {
     }
 
 }
-
- */

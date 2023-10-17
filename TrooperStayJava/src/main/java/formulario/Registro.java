@@ -1,29 +1,65 @@
-
 package formulario;
 
-
-
+import modelo.CorreccionDeErrores;
 import database.Conexion;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-public class Registro {
-    
-    Conexion cn = new Conexion(); // Esto esta de más
-     public void registrarUsuario() {
-        String nombreUsuario = JOptionPane.showInputDialog("Ingrese un nombre de usuario:");
-        String contrasenia = JOptionPane.showInputDialog("Ingrese una contraseña:");
-        String correo = JOptionPane.showInputDialog("Ingrese su correo:");
-        int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese su edad:"));
-        String nombre = JOptionPane.showInputDialog("Ingrese su nombre:");
-        String apellido = JOptionPane.showInputDialog("Ingrese su apellido:");
-        float saldo = Float.parseFloat(JOptionPane.showInputDialog("Ingrese su saldo:"));
 
-        if (insertarUsuario(nombreUsuario, contrasenia, correo, edad, nombre, apellido, saldo)) {
+public class Registro {
+
+    Conexion cn = new Conexion();
+    CorreccionDeErrores correccion = new CorreccionDeErrores();
+    boolean registroExitoso = true;
+    
+    public void registrarUsuario() {
+         
+        String nombreUsuario = correccion.correccionString("Ingrese su Usuario: ");
+        if (nombreUsuario == null){
+            registroExitoso = false;
+            return;
+        }
+        
+        String contrasenia = correccion.correccionString( "Ingrese una contraseña:");
+        if (contrasenia == null){
+            registroExitoso = false;
+            return;
+        }
+        
+        String correo = correccion.correccionString("Ingrese su correo:");
+        if (correo == null){
+            registroExitoso = false;
+            return;
+        }
+
+        int edad = correccion.correccionInt("Ingrese su edad:");
+        if (edad == 0){
+            registroExitoso = false;
+            return;
+        }
+        
+        String nombre = correccion.correccionString("Ingrese su nombre:");
+        if (nombre == null){
+            registroExitoso = false;
+            return;
+        }
+        
+        String apellido = correccion.correccionString("Ingrese su apellido:");
+        if (apellido == null){
+            registroExitoso = false;
+            return;
+        }
+        
+        //Determinamos por defecto un salgo para todo el que se registra $100.000
+        float saldo = 100000;
+        
+        if (registroExitoso) {
+            insertarUsuario(nombreUsuario, contrasenia, correo, edad, nombre, apellido, saldo);
             JOptionPane.showMessageDialog(null, "Registro exitoso.");
         } else {
             JOptionPane.showMessageDialog(null, "Error en el registro. Inténtelo nuevamente.");
+
         }
     }
 
@@ -47,5 +83,4 @@ public class Registro {
             return false;
         }
     }
-
 }
