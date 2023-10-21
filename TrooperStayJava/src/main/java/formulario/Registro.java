@@ -39,20 +39,20 @@ public class Registro {
             return;
         }
         
-        String nombre = correccion.correccionString("Ingrese su nombre:");
+        String nombre = correccion.correccionNombreApellido("Ingrese su nombre:");
         if (nombre == null){
             registroExitoso = false;
             return;
         }
         
-        String apellido = correccion.correccionString("Ingrese su apellido:");
+        String apellido = correccion.correccionNombreApellido("Ingrese su apellido:");
         if (apellido == null){
             registroExitoso = false;
             return;
         }
         
-        //Determinamos por defecto un salgo para todo el que se registra $100.000
-        float saldo = 100000;
+        //Determinamos por defecto un salgo para todo el que se registra $1.000.000
+        float saldo = 1000000;
         
         if (registroExitoso) {
             insertarUsuario(nombreUsuario, contrasenia, correo, edad, nombre, apellido, saldo);
