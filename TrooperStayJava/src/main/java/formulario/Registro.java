@@ -15,7 +15,7 @@ public class Registro {
     
     public void registrarUsuario() {
          
-        String nombreUsuario = correccion.correccionString("Ingrese su Usuario: ");
+        String nombreUsuario = correccion.correccionUsuario("Ingrese su Usuario: ");
         if (nombreUsuario == null){
             registroExitoso = false;
             return;
@@ -27,7 +27,7 @@ public class Registro {
             return;
         }
         
-        String correo = correccion.correccionString("Ingrese su correo:");
+        String correo = correccion.correccionCorreo("Ingrese su correo:");
         if (correo == null){
             registroExitoso = false;
             return;

@@ -53,6 +53,22 @@ public class ObtenerInformacion {
             return null;
         }
     }
+    
+    
+    public boolean verificarUsuario(String nombreUsuario) {
+    // Query de consulta para verificar si los datos ingresados son correctos
+    String sql = "SELECT nombre_de_usuario FROM tu_tabla WHERE nombre_de_usuario = ?";
+    try (PreparedStatement statement = CONEXION.prepareStatement(sql)) {
+        statement.setString(1, nombreUsuario);
+        ResultSet resultSet = statement.executeQuery();
+
+        // Verificar si se encontró un resultado en la consulta
+        return resultSet.next();
+    } catch (SQLException e) { // Puedes imprimir el error para depuración.
+        
+        return false;
+    }
+}
 
     public List<AlojamientoHospedaje> filtrarHospedajes(String localizacion, int capacidad) {
         List<AlojamientoHospedaje> hospedajesFiltrados = new ArrayList<>();

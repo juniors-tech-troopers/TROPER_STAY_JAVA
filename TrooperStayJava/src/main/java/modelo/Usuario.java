@@ -18,4 +18,8 @@ public class Usuario {
         this.saldo = saldo;
     }
     
+    public Usuario(String nombre_de_usuario) {
+        this.nombre_de_usuario = nombre_de_usuario;
+    }
+    
 }
