@@ -32,22 +32,45 @@ public class CorreccionDeErrores {
 
         return null; // Retorna null para indicar que no se pudo obtener un valor válido después de tres intentos.
     }
+    
+    public String correccionNombreApellido(String dato) {
+        int conteo = 0;
+
+        while (conteo < 3) {
+            String texto = JOptionPane.showInputDialog(dato);
+            conteo++;
+            if (conteo != 3) {
+                if (texto == null || texto.isEmpty() && conteo < 3) {
+                    // Si el texto es nulo o está vacío, pedir al usuario que ingrese un texto no nulo.
+                    JOptionPane.showMessageDialog(null, "ERROR: No puede estar vacío. Intentos restantes: " + (3 - conteo));
+                } else {
+                    // Si el texto cumple con los requisitos, simplemente lo devolvemos sin cambios.
+                    return texto;
+                }
+            }
+        }
+
+        JOptionPane.showMessageDialog(
+                null, "Volvemos al menú principal");
+
+        return null; // Retorna null para indicar que no se pudo obtener un valor válido después de tres intentos.
+    }
 
     public Integer correccionInt(String mensaje) {
         int numero = 0;
         int conteo = 0;
         String input = JOptionPane.showInputDialog(mensaje);
-                try {
-                    numero = Integer.parseInt(input);
-                    if (numero >= 18) {
-                        return numero;
-                    } 
-                } catch (NumberFormatException e) {
-                    // Error al convertir a entero
-                }
-                 JOptionPane.showMessageDialog(null, "ERROR: Debe ser mayor de 18 años");
-                 JOptionPane.showMessageDialog(null, "Volvemos al menú principal");
-                 return 0;
+        try {
+            numero = Integer.parseInt(input);
+            if (numero >= 18) {
+                return numero;
+            }
+        } catch (NumberFormatException e) {
+            // Error al convertir a entero
+        }
+        JOptionPane.showMessageDialog(null, "ERROR: Debe ser mayor de 18 años");
+        JOptionPane.showMessageDialog(null, "Volvemos al menú principal");
+        return 0;
     }
 
     public String correccionCorreo(String dato) {
@@ -56,13 +79,15 @@ public class CorreccionDeErrores {
         while (conteo < 3) {
             String texto = JOptionPane.showInputDialog(dato);
             conteo++;
-            if (texto == null || texto.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "ERROR: el correo no puede estar vacío. Intentos restantes: " + (3 - conteo));
-            } else if (!texto.contains("@") && (!texto.contains(".com") || !texto.contains(".ar"))) {
-                JOptionPane.showMessageDialog(null, "ERROR: Correo electrónico incorrecto. Intentos restantes: " + (3 - conteo));
+            if (conteo != 3) {
+                if (texto == null || texto.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "ERROR: el correo no puede estar vacío. Intentos restantes: " + (3 - conteo));
+                } else if (!texto.contains("@") && (!texto.contains(".com") || !texto.contains(".ar"))) {
+                    JOptionPane.showMessageDialog(null, "ERROR: Correo electrónico incorrecto. Intentos restantes: " + (3 - conteo));
 
-            } else {
-                return texto;
+                } else {
+                    return texto;
+                }
             }
 
         }
