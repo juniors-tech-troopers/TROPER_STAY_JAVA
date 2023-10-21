@@ -57,7 +57,7 @@ public class ObtenerInformacion {
     
     public boolean verificarUsuario(String nombreUsuario) {
     // Query de consulta para verificar si los datos ingresados son correctos
-    String sql = "SELECT nombre_de_usuario FROM tu_tabla WHERE nombre_de_usuario = ?";
+    String sql = "SELECT nombre_de_usuario FROM usuarios WHERE nombre_de_usuario = ?";
     try (PreparedStatement statement = CONEXION.prepareStatement(sql)) {
         statement.setString(1, nombreUsuario);
         ResultSet resultSet = statement.executeQuery();
