@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import modelo.AlojamientoHospedaje;
 import modelo.Provincias;
+import modelo.Usuario;
 
 /**
  * @author lopoj
@@ -21,7 +22,7 @@ public class VerHospedajes extends JPanel {
     private final ObtenerInformacion obtenerInformacion;
     private final Carrito carrito;
     Provincias provincias = new Provincias(); // Instanciamos el modelo
-
+    Usuario usuario = new Usuario();
 
     public VerHospedajes() {
         setLayout(new BorderLayout());
@@ -74,9 +75,17 @@ public class VerHospedajes extends JPanel {
             JOptionPane.showMessageDialog(null, "POBRE DE MIERDA NO PODES VIAJAR");
         }
         
-        JOptionPane.showMessageDialog(null, "PERFECTO");
+        JOptionPane.showMessageDialog(null, "Que disfrute de su estadia!! :)");
+
+        Panel panel = new Panel();
+
+
+        obtenerInformacion.obtenerObjetoPanel(idUsuario);
+
+        panel.Panel(new Usuario(idUsuario, usuario.nombre_de_usuario, saldoUsuario));
         
     }
+
 // Listado alquileres
 
     public AlojamientoHospedaje seleccionarAlquileres(List<AlojamientoHospedaje> hospedajes) {

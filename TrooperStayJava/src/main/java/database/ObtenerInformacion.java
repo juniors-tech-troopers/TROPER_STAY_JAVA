@@ -121,4 +121,24 @@ public class ObtenerInformacion {
             return 0;
         }
     }
+    public Usuario obtenerObjetoPanel(int usuarioId){
+        String sql= "SELECT id, nombre_de_usuario, saldo FROM usuarios WHERE id = 1?;";
+        try {
+
+            PreparedStatement stmt = CONEXION.prepareStatement(sql);
+            stmt.setInt(1, usuarioId);
+            ResultSet resultSet = stmt.executeQuery();
+            Usuario usuario = new Usuario(
+                    resultSet.getInt("id"),
+                    resultSet.getString("nombre_de_usuario"),
+                    resultSet.getDouble("saldo")
+            );
+            return usuario;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
