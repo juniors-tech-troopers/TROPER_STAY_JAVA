@@ -15,7 +15,6 @@ public class Panel {
     //Creamos un objeto de la clase verHospedaje
     VerHospedajes vista = new VerHospedajes();
 
-    private int idUsuario; // Agrega una variable para almacenar el ID de usuario
 
     //Constructor
     public Panel() {
@@ -34,7 +33,7 @@ public class Panel {
             switch (opcion) {
                 case 0:
                     // Lógica para "Ver hospedajes"
-                    vista.ingresarFiltrosDeUsuario(usuario.id, usuario.saldo);
+                    vista.ingresarFiltrosDeUsuario(usuario);
                     break;
                 case 1:
                     //Lógica para "Insetar hospedajes"

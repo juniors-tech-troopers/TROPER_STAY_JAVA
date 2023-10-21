@@ -47,17 +47,17 @@ public class ActualizarInformacion {
 
     public void actualizarUsuarioPropietario(AlojamientoHospedaje alquilerSeleccionado, double montoFinal) {
         ObtenerInformacion obtenerInformacion = new ObtenerInformacion();
-        double saldoDelUsuarioPropietario = obtenerInformacion.obtenerSaldoDeUsuarioPorId(
+        float saldoDelUsuarioPropietario = obtenerInformacion.obtenerSaldoDeUsuarioPorId(
                 alquilerSeleccionado.getId_usuario()
         );
 
-        double montoFinalPropietario = saldoDelUsuarioPropietario + montoFinal;
+        float montoFinalPropietario = (float) (saldoDelUsuarioPropietario + montoFinal);
 
         String sql = "UPDATE usuarios SET saldo = ? WHERE id = ?";
 
         try (PreparedStatement statement = CONEXION.prepareStatement(sql)) {
 
-            statement.setDouble(1, montoFinalPropietario);
+            statement.setFloat(1, montoFinalPropietario);
             statement.setInt(2, alquilerSeleccionado.getId_usuario());
             statement.executeUpdate();
 

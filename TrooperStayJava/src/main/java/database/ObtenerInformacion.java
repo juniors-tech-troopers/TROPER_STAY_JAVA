@@ -106,7 +106,7 @@ public class ObtenerInformacion {
         return hospedajesFiltrados;
     }
 
-    public double obtenerSaldoDeUsuarioPorId(int usuarioId) {
+    public float obtenerSaldoDeUsuarioPorId(int usuarioId) {
         String sql = "SELECT saldo FROM usuarios WHERE id = ?;";
 
         try {
@@ -114,31 +114,41 @@ public class ObtenerInformacion {
             stmt.setInt(1, usuarioId);
             ResultSet rs = stmt.executeQuery();
 
-            return rs.getDouble("saldo");
+            if (rs.next()) { // Mover el cursor al primer registro
+                return rs.getFloat("saldo");
+            } else {
+                // Manejar el caso en el que no se encuentra ningún registro con el usuarioId dado
+                return 0;
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;
         }
     }
-    public Usuario obtenerObjetoPanel(int usuarioId){
-        String sql= "SELECT id, nombre_de_usuario, saldo FROM usuarios WHERE id = 1?;";
-        try {
 
+    public Usuario obtenerObjetoPanel(int usuarioId) {
+        String sql = "SELECT id, nombre_de_usuario, saldo FROM usuarios WHERE id = ?;";
+        try {
             PreparedStatement stmt = CONEXION.prepareStatement(sql);
             stmt.setInt(1, usuarioId);
             ResultSet resultSet = stmt.executeQuery();
-            Usuario usuario = new Usuario(
-                    resultSet.getInt("id"),
-                    resultSet.getString("nombre_de_usuario"),
-                    resultSet.getDouble("saldo")
-            );
-            return usuario;
 
-
+            if (resultSet.next()) { // Mover el cursor al primer registro
+                Usuario usuario = new Usuario(
+                        resultSet.getInt("id"),
+                        resultSet.getString("nombre_de_usuario"),
+                        resultSet.getDouble("saldo")
+                );
+                return usuario;
+            } else {
+                // Manejar el caso en el que no se encuentra ningún registro con el usuarioId dado
+                return null;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
+
 }

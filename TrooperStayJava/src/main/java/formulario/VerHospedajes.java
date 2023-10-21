@@ -20,19 +20,21 @@ import modelo.Usuario;
  */
 public class VerHospedajes extends JPanel {
     private final ObtenerInformacion obtenerInformacion;
-    private final Carrito carrito;
+
     Provincias provincias = new Provincias(); // Instanciamos el modelo
-    Usuario usuario = new Usuario();
+
+
+
 
     public VerHospedajes() {
         setLayout(new BorderLayout());
 
         obtenerInformacion = new ObtenerInformacion();
-        carrito = new Carrito();
+
 
     }
 
-    public void ingresarFiltrosDeUsuario(int idUsuario, double saldoUsuario) {
+    public void ingresarFiltrosDeUsuario(Usuario usuario) {
         // Llamamos al metodo get provincia para realizar la muestra por filtrado
         String localizacion = provincias.getProvincias();
         // Esto para seguir un patron de ingreso a la base de datos.
@@ -46,7 +48,7 @@ public class VerHospedajes extends JPanel {
         AlojamientoHospedaje alquilerSeleccionado = seleccionarAlquileres(hospedajes);
 
         // Ingresamos el id del que acaba de Alquilar
-        alquilerSeleccionado.setId_usuario_inquilino(idUsuario);
+        alquilerSeleccionado.setId_usuario_inquilino(usuario.id);
 
         // Fecha de hospedaje
         alquilerSeleccionado.setInicio_estadia(JOptionPane.showInputDialog("Ingrese AAAA-MM-DD:"));
@@ -59,13 +61,13 @@ public class VerHospedajes extends JPanel {
 
         // Calculamos el monto que le descontamos al saldo
         double montoFinal = diasHospedaje * alquilerSeleccionado.getPrecio_por_noche();
-        if (montoFinal <= saldoUsuario) {
+        if (montoFinal <= usuario.saldo) {
             ActualizarInformacion actualizarInformacion = new ActualizarInformacion();
             // TODO: PRIMERO ACTUALIZAMOS EL HOSPEDAJE
             actualizarInformacion.actualizarHospedajes(alquilerSeleccionado);
 
             // TODO: SEGUNDO ACTUALIZAMOS EL USUARIO INQUILINO
-            double montoFinalInquilino = saldoUsuario - montoFinal;
+            double montoFinalInquilino = usuario.saldo - montoFinal;
             actualizarInformacion.actualizarUsuarioInquilino(alquilerSeleccionado, montoFinalInquilino);
 
             // TODO: TERCER ACTUALIZAMOS EL USUARIO PROPIETARIO
@@ -74,16 +76,15 @@ public class VerHospedajes extends JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "POBRE DE MIERDA NO PODES VIAJAR");
         }
-        
+
         JOptionPane.showMessageDialog(null, "Que disfrute de su estadia!! :)");
 
+        // Lo instanciamos para que no de problemas de recursividad
         Panel panel = new Panel();
+        obtenerInformacion.obtenerObjetoPanel(usuario.id);
 
+        panel.Panel(usuario);
 
-        obtenerInformacion.obtenerObjetoPanel(idUsuario);
-
-        panel.Panel(new Usuario(idUsuario, usuario.nombre_de_usuario, saldoUsuario));
-        
     }
 
 // Listado alquileres
