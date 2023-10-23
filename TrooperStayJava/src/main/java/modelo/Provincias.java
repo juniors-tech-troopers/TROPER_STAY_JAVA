@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Provincias {
+
     private ArrayList<String> provincias = new ArrayList<>(Arrays.asList(
             "Buenos Aires",
             "Catamarca",
@@ -29,19 +30,38 @@ public class Provincias {
             "Santiago del Estero",
             "Tierra del Fuego"
     ));
-    public String getProvincias() {
-        String[] provinciasArray = provincias.toArray(new String[0]);
 
-        String localizacion = (String) JOptionPane.showInputDialog(
-                null,
-                "Seleccione una provincia:",
-                "Selección de Provincia",
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                provinciasArray,
-                provinciasArray[0]
-        );
-        return localizacion.toLowerCase();
-        // TODO: toLowerCase(Locale.ROOT) convierte a minuscula
+    public String getProvincias() {
+        boolean salida = false;
+        int conteo = 0;
+        while (!salida) {
+            
+            String[] provinciasArray = provincias.toArray(new String[0]);
+            conteo++; 
+            String localizacion = (String) JOptionPane.showInputDialog(
+                    null,
+                    "Seleccione una provincia:",
+                    "Selección de Provincia",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    provinciasArray,
+                    provinciasArray[0]
+            );
+            
+            if (localizacion == null || localizacion.isEmpty()){
+                if (conteo == 3) {
+                    JOptionPane.showMessageDialog(null, "Volvemos al Menu");
+                    salida = true;
+                    return null;
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR: Debe seleccionar una Provincia. Intentos restantes: " + (3-conteo));
+                }
+            } else {
+                // TODO: toLowerCase(Locale.ROOT) convierte a minuscula
+                salida = true; 
+                return localizacion.toLowerCase();
+            }
+        }
+        return null;
     }
 }

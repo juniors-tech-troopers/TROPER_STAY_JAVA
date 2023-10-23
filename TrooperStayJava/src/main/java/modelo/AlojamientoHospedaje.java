@@ -2,10 +2,10 @@ package modelo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 
 public class AlojamientoHospedaje {
 
-    
     // Se usa private final porque es un atributo inmutable y despues usamos un get
     private final int id;
     private final String nombre;
@@ -34,7 +34,6 @@ public class AlojamientoHospedaje {
         this.estadia = estadia;
     }
 
-
     // Se creo para crear un nuevo hospedaje
     public AlojamientoHospedaje(String nombre, int tipo, int capacidad, String localizacion, double precio_por_noche, int id_usuario) {
         this.nombre = nombre;
@@ -51,7 +50,7 @@ public class AlojamientoHospedaje {
         this.estadia = "";
 
     }
-    
+
     //Getter y Setter
     public int getId() {
         return id;
@@ -92,6 +91,7 @@ public class AlojamientoHospedaje {
     public String getInicio_estadia() {
         return inicio_estadia;
     }
+
     public String getEstadia() {
         return estadia;
     }
@@ -104,11 +104,36 @@ public class AlojamientoHospedaje {
         this.id_usuario_inquilino = id_usuario_inquilino;
     }
 
-    public void setInicio_estadia(String inicio_estadia) {
-        this.inicio_estadia = inicio_estadia;
-    }
+public void setInicio_estadia(String inicio_estadia) {
+    boolean fechaValida = false;
 
-    public void setEstadia(int estadia) {
+    while (!fechaValida) {
+        // Obtener la fecha actual
+        LocalDate fechaActual = LocalDate.now();
+
+        try {
+            // Convierte la fecha de inicio a LocalDate
+            LocalDate fechaInicio = LocalDate.parse(inicio_estadia, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+            // Verifica si la fecha de inicio es mayor o igual a la fecha actual
+            if (fechaInicio.isAfter(fechaActual) || fechaInicio.isEqual(fechaActual)) {
+                fechaValida = true;
+                this.inicio_estadia = inicio_estadia;
+            } else {
+                // La fecha de inicio es menor que la fecha actual, muestra un mensaje de error
+                JOptionPane.showMessageDialog(null, "La fecha de inicio debe ser mayor o igual que la fecha actual.");
+                // Pide al usuario que ingrese una fecha válida
+                inicio_estadia = JOptionPane.showInputDialog("Ingrese AAAA-MM-DD:");
+            }
+        } catch (Exception e) {
+            // Si ocurre un error al analizar la fecha, muestra un mensaje de error
+            JOptionPane.showMessageDialog(null, "Formato de fecha no válido. Ingrese AAAA-MM-DD.");
+            // Pide al usuario que ingrese una fecha válida
+            inicio_estadia = JOptionPane.showInputDialog("Ingrese AAAA-MM-DD:");
+        }
+    }
+}
+        public void setEstadia(int estadia) {
         // Convierte inicio_estadia a LocalDate
         LocalDate fechaInicio = LocalDate.parse(inicio_estadia, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
@@ -117,6 +142,5 @@ public class AlojamientoHospedaje {
 
         // Convierte la fecha resultante de vuelta a String en el formato deseado
         this.estadia = fechaEstadia.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    }
+    } 
 }
-

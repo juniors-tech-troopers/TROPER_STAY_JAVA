@@ -32,26 +32,24 @@ public class CorreccionDeErrores {
 
         return null; // Retorna null para indicar que no se pudo obtener un valor válido después de tres intentos.
     }
-    
+
     public String correccionNombreApellido(String dato) {
         int conteo = 0;
 
         while (conteo < 3) {
             String texto = JOptionPane.showInputDialog(dato);
             conteo++;
-            if (conteo != 3) {
-                if (texto == null || texto.isEmpty() && conteo < 3) {
+            if (texto == null || texto.isEmpty() && conteo < 3) {
                     // Si el texto es nulo o está vacío, pedir al usuario que ingrese un texto no nulo.
                     JOptionPane.showMessageDialog(null, "ERROR: No puede estar vacío. Intentos restantes: " + (3 - conteo));
                 } else {
                     // Si el texto cumple con los requisitos, simplemente lo devolvemos sin cambios.
                     return texto;
                 }
-            }
         }
 
         JOptionPane.showMessageDialog(
-                null, "Volvemos al menú principal");
+                null, "Volvemos al Menu");
 
         return null; // Retorna null para indicar que no se pudo obtener un valor válido después de tres intentos.
     }
@@ -69,8 +67,69 @@ public class CorreccionDeErrores {
             // Error al convertir a entero
         }
         JOptionPane.showMessageDialog(null, "ERROR: Debe ser mayor de 18 años");
-        JOptionPane.showMessageDialog(null, "Volvemos al menú principal");
+        JOptionPane.showMessageDialog(null, "Volvemos al Menu");
         return 0;
+    }
+    
+   public double correccionPrecio(String mensaje) {
+    int conteo = 0;
+    
+    while (conteo < 3) {
+        String input = JOptionPane.showInputDialog(mensaje);
+        
+        if (input == null || input.isEmpty()){
+            input = "0.0";
+        }
+            
+        
+        try {
+            double numero = Double.parseDouble(input);
+
+            if (numero > 0.0) {
+                return numero;
+            }
+        } catch (NumberFormatException e) {
+            // Error al convertir a número decimal
+        }
+
+        if (conteo < 2) {
+            JOptionPane.showMessageDialog(null, "ERROR: Debe ser un número mayor a cero. Intentos restantes: " + (3 - conteo));
+        } else {
+            JOptionPane.showMessageDialog(null, "Volvemos al Menú");
+        }
+        
+        conteo++;
+    }
+    
+    return 0.0; // Devolvemos 0.0 si el usuario no ingresa un número válido en tres intentos.
+}
+
+
+    public Integer correccionInt2(String mensaje) {
+        int conteo = 0;
+
+        while (conteo < 3) {
+
+            String input = JOptionPane.showInputDialog(mensaje);
+            conteo++;
+            if (conteo != 3) {
+                try {
+                    int numero = Integer.parseInt(input);
+
+                    if (numero > 0 && numero < 30) {
+                        return numero;
+                    }
+                } catch (NumberFormatException e) {
+                    // Error al convertir a entero
+                }
+
+                JOptionPane.showMessageDialog(null, "ERROR: Debe ser un número mayor a cero y menor a 30. Intentos restantes: " + (3 - conteo));
+                
+
+            }
+        }
+        JOptionPane.showMessageDialog(null, "Volvemos al Manu");
+        return 0; // Devolvemos null si el usuario no ingresa un número válido en tres intentos.
     }
 
     public String correccionCorreo(String dato) {
@@ -82,7 +141,7 @@ public class CorreccionDeErrores {
             if (conteo != 3) {
                 if (texto == null || texto.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "ERROR: el correo no puede estar vacío. Intentos restantes: " + (3 - conteo));
-                } else if (!texto.contains("@") && (!texto.contains(".com") || !texto.contains(".ar"))) {
+                } else if (!texto.contains("@") || (!texto.contains(".com") || !texto.contains(".ar"))) {
                     JOptionPane.showMessageDialog(null, "ERROR: Correo electrónico incorrecto. Intentos restantes: " + (3 - conteo));
 
                 } else {
@@ -119,7 +178,7 @@ public class CorreccionDeErrores {
             }
         }
 
-        JOptionPane.showMessageDialog(null, "Volvemos al menú principal");
+        JOptionPane.showMessageDialog(null, "Volvemos al Menu ");
         return null; // Retorna null para indicar que no se pudo obtener un valor válido después de tres intentos.
     }
 
