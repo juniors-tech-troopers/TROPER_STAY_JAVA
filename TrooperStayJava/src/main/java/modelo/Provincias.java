@@ -28,7 +28,8 @@ public class Provincias {
             "Santa Cruz",
             "Santa Fe",
             "Santiago del Estero",
-            "Tierra del Fuego"
+            "Tierra del Fuego",
+            "Tucumán"
     ));
 
     public String getProvincias() {
