@@ -141,7 +141,7 @@ public class CorreccionDeErrores {
             if (conteo != 3) {
                 if (texto == null || texto.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "ERROR: el correo no puede estar vacío. Intentos restantes: " + (3 - conteo));
-                } else if (!texto.contains("@") || (!texto.contains(".com") || !texto.contains(".ar"))) {
+                } else if (!texto.contains("@") || !texto.contains(".com")) {
                     JOptionPane.showMessageDialog(null, "ERROR: Correo electrónico incorrecto. Intentos restantes: " + (3 - conteo));
 
                 } else {

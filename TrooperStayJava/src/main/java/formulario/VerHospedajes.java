@@ -78,6 +78,19 @@ public class VerHospedajes extends JPanel {
 
             // Calculamos el monto que le descontamos al saldo
             double montoFinal = diasHospedaje * alquilerSeleccionado.getPrecio_por_noche();
+            String[] arreglo = {"Aceptar", "Calcelar"};
+            int opcion = JOptionPane.showOptionDialog(null, "Presiona ACEPTAR para continuar o CANCELAR para volver al menu", "Su alquiler por " + diasHospedaje +" tiene un monto final de $" +montoFinal, 0, JOptionPane.QUESTION_MESSAGE, null, arreglo, "");
+
+            switch (opcion) {
+                case 0:
+                    JOptionPane.showMessageDialog(null, "Su alquiler por " + diasHospedaje +" tiene un monto final de $" +montoFinal );
+                    break;
+                default:
+                    // Cualquier otra opcion sale
+                    salir = true;
+                    return;
+            }
+
             if (montoFinal <= usuario.saldo) {
                 ActualizarInformacion actualizarInformacion = new ActualizarInformacion();
                 // TODO: PRIMERO ACTUALIZAMOS EL HOSPEDAJE
