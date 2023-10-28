@@ -59,7 +59,7 @@ public class Provincias {
                 }
             } else {
                 // TODO: toLowerCase(Locale.ROOT) convierte a minuscula
-                salida = true; 
+                salida = true;
                 return localizacion.toLowerCase();
             }
         }

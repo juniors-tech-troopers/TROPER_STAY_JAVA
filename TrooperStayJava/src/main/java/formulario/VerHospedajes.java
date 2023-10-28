@@ -112,7 +112,7 @@ public class VerHospedajes extends JPanel {
             // Lo instanciamos para que no de problemas de recursividad
             Panel panel = new Panel();
             obtenerInformacion.obtenerObjetoPanel(usuario.id);
-
+            salir = true; 
             panel.Panel(usuario);
         }
 
