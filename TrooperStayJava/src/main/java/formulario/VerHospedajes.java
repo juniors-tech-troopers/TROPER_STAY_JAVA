@@ -113,7 +113,6 @@ public class VerHospedajes extends JPanel {
             Panel panel = new Panel();
             obtenerInformacion.obtenerObjetoPanel(usuario.id);
             salir = true; 
-            panel.Panel(usuario);
         }
 
     }
